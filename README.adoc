@@ -13,6 +13,13 @@ Attendees will learn:
 . Effective use of developer tools such as Query Workbench, Couchbase CLI and REST API
 . How to create a simple Couchbase cluster using Docker or cloud platforms such as Amazon and Azure
 
+=== Workshops
+
+* Workshop A: Installing and setting up Couchbase
+* Workshop B: Creating a "Hello, World" console application with .NET/C#
+* Workshop C: Creating a Full Stack ASP.NET Angular application
+* (optional) Workshop D: Setting up a Couchbase Cluster in Docker
+
 === Target Audience
 
 Broad range of developers interested in using Couchbase Server
@@ -31,9 +38,9 @@ You will need:
  
 For .NET development you will need:
 
-* Visual Studio 2015 or later (Visual Studio Code will not be sufficient)
+* Visual Studio 2015 or later for .NET Framework
+* Visual Studio Code for .NET Core
  
-
 For Angular development, you will need:
 
 * angular-cli
