@@ -1,0 +1,10 @@
+# Temp files
+* ~
+
+# Maven
+target /
+
+# Intellij
+.idea /
+* .iml
+* .iws

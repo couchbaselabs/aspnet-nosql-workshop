@@ -1,0 +1,83 @@
+= Intro
+
+For the Part 03 lab of the developer workshop, we will be building a full stack application:
+	Angular2 -> REST endpoints -> Couchbase
+	
+The Angular2 code will be reused across the board, so I just need a few endpoints for Angular to talk to
+and a single HTML page that will host Angular. Node.js should use Express.js. .NET should use WebAPI. Java should
+use Spring(?). PHP can use whatever.
+
+= Overall notes:
+
+	-endpoints return 200 when successful
+	-endpoints return 400 if validation fails (e.g. something incorrect was posted) with message
+	-endpoints return 500 if something else went wrong (e.g. bad connection, timeout, etc) with message
+	-the angular2 code expects the endpoints to behave as indicated, otherwise the UI may not behave as designed
+	-use asynchronous programming for endpoints
+
+= GET index.html 
+
+	- this should be displayed when the developer starts the web server and opens http://localhost:8080 in their browser (e.g. "node app.js" for Node or "ctrl+f5" in Visual Studio)
+	-should return a body to enable angular:
+	
+	<!doctype html>
+	<html>
+	<head>
+	  <meta charset="utf-8">
+	  <title>Angular</title>
+	  <base href="/">
+
+	  <script src="/ember-cli-live-reload.js" type="text/javascript"></script>
+	  <meta name="viewport" content="width=device-width, initial-scale=1">
+	  <link rel="icon" type="image/x-icon" href="favicon.ico">
+	  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous" />
+	</head>
+	<body>
+	  <app-root>Loading...</app-root>
+
+		<script src="vendor/es6-shim/es6-shim.js"></script>
+		<script src="vendor/reflect-metadata/Reflect.js"></script>
+		<script src="vendor/systemjs/dist/system.src.js"></script>
+		<script src="vendor/zone.js/dist/zone.js"></script>
+		<script>
+		  System.import('system-config.js').then(function () {
+			System.import('main');
+		  }).catch(console.error.bind(console));
+		</script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+	</body>
+	</html>
+	
+= POST /api/delete
+
+	-expects document_id to be posted in the body
+	-example: { "document_id": "abc123" }
+	-deletes the document
+	-basic validation to make sure document_id was posted
+	-show error handling / timeout patterns
+	-good place to demonstrate CAS?
+
+= POST /api/save
+
+	-expects a json object to be posted in the body
+	-example: { "firstname": "Matt", "lastname": "Groves", "email": "foo@bar.com"}
+	-basic validation to make sure firstname, lastname, email were posted
+	-if document_id is missing, a new document is created with a GUID/UUID as key
+	-if document_id is not missing, update existing document that has the document_id as key
+	-show error handling / timeout patterns
+	-good place to demonstrate CAS?
+
+= GET /api/get
+
+	-expects document_id to be posted in the URL
+	-example: "/api/get/abc123"
+	-returns a array of 1 document in JSON format, example: [{ "firstname": "Matt", "lastname": "Groves", "email": "foo@bar.com"}]
+	-use Get operation (alternatively use N1QL and demonstrate ScanConsistency)
+	-show error handling / timeout patterns
+
+= GET /api/getAll
+
+	-returns all documents in JSON format with key, example: [{ "id": "abc123", firstname": "Matt", "lastname": "Groves", "email": "foo@bar.com"}, { etc }, { etc }]
+	-use N1QL with ScanConsistency
+	-use proper SDK parameterization with N1QL
+	-show error handling / timeout patterns

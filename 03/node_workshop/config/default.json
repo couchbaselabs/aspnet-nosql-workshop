@@ -1,0 +1,6 @@
+{
+  "couchbase": {
+    "server": "TODO",
+    "bucket": "TODO"
+  }
+}

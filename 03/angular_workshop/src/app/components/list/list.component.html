@@ -1,0 +1,24 @@
+<button class="btn btn-primary" [routerLink]="['/item']">New Item</button>
+<br />
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let person of people">
+            <!-- TODO: bind these three cells in the table to firstname, lastname, and email fields of person -->
+            <td>TODO</td>
+            <td>TODO</td>
+            <td>TODO</td>
+            <td></td>
+            <td>
+                <!-- TODO: bind the click event of this link to the delete method, passing in the id field of person -->
+                <a [routerLink]="['/item', person.id]">edit</a> | <a href="#" (click)="TODO">delete</a></td>
+        </tr>
+    </tbody>
+</table>

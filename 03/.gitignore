@@ -1,0 +1,15 @@
+angular/public
+angular/dist
+angular/tmp
+angular/node_modules
+
+.idea/
+.mvn/
+target/
+build/
+bin/
+
+
+.DS_Store*
+Thumbs.db*
+~*

@@ -1,0 +1,19 @@
+<form>
+    <div class="form-group">
+        <label for="firstname">First Name</label>
+        <input type="text" class="form-control" id="firstname" placeholder="First Name" [(ngModel)]="person.firstname">
+    </div>
+    <div class="form-group">
+        <label for="lastname">Last Name</label>
+        <!-- TODO: bind this text input to the lastname field of person -->
+        <input type="text" class="form-control" id="lastname" placeholder="Last Name" [(ngModel)]="person.lastname">
+    </div>
+    <div class="form-group">
+        <label for="email">Email</label>
+        <!-- TODO: bind this text input to the email field of person -->
+        <input type="text" class="form-control" id="email" placeholder="Email" [(ngModel)]="person.email">
+    </div>
+    <button type="button" class="btn btn-danger" [routerLink]="['/']">Cancel</button>
+    <!-- TODO: bind the click event on this save button to call the save method in item.component.ts -->
+    <button type="button" class="btn btn-success" (click)="save()">Save</button>
+</form>

@@ -1,0 +1,6 @@
+{
+  "couchbase": {
+    "server": "couchbase://127.0.0.1",
+    "bucket": "default"
+  }
+}
