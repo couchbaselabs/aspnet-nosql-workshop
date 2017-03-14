@@ -1,0 +1,22 @@
+<button class="btn btn-primary" [routerLink]="['/item']">New Item</button>
+<br />
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let person of people">
+            <td>{{person.FirstName}}</td>
+            <td>{{person.LastName}}</td>
+            <td>{{person.Email}}</td>
+            <td></td>
+            <td>
+                <a [routerLink]="['/item', person.Id]">edit</a> | <a href="#" (click)="delete(person.Id)">delete</a></td>
+        </tr>
+    </tbody>
+</table>

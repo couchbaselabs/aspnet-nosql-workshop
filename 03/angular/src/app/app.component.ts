@@ -1,12 +1,9 @@
 import { Component } from '@angular/core';
-import { ROUTER_DIRECTIVES } from '@angular/router';
-import { Utility } from './utility';
 
 @Component({
   selector: 'app-root',
-  template: '<div style="padding: 10px"><router-outlet></router-outlet></div>',
-  directives: [ROUTER_DIRECTIVES],
-  providers: [Utility]
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
 })
 export class AppComponent {
   title = 'app works!';
