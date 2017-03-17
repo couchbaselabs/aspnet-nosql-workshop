@@ -4,6 +4,8 @@ import { Http, Headers, RequestOptions } from '@angular/http';
 import { Utility } from '../utility';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/do';
 
 @Component({
   selector: 'app-item',

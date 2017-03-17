@@ -1,0 +1,24 @@
+<!-- TODO: bind the first name, last name, and email fields to the 'person'' field -->
+<!-- Hint 0: You need to use some Angular syntax on the input fields -->
+<!-- Hint 1: Angular syntax is [(ngModel)]="object.field" -->
+<!-- Hint 2: the field names should match those in item.ts -->
+<div class="form-group">
+    <label for="firstname">First Name</label>
+    <input type="text" class="form-control" id="FirstName" name="FirstName" placeholder="First Name" [(ngModel)]="person.FirstName" />
+</div>
+<div class="form-group">
+    <label for="lastname">Last Name</label>
+    <input type="text" class="form-control" id="LastName" placeholder="Last Name" [(ngModel)]="person.LastName">
+</div>
+<div class="form-group">
+    <label for="email">Email</label>
+    <input type="text" class="form-control" id="Email" placeholder="Email" [(ngModel)]="person.Email">
+</div>
+
+<!-- TODO: create a cancel button that links back to the root page -->
+<!-- Hint 0: Remember that router links can be generated with [routerLink]="['route location']" -->
+<button type="button" class="btn btn-danger" >Cancel</button>
+
+<!-- TODO: create a save button that triggers the save method in item.component.ts when clicking -->
+<!-- Hint 0: Angular syntax for click event is (click)="methodName()" -->
+<button type="button" class="btn btn-success" >Save</button>
