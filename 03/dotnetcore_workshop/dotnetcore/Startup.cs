@@ -30,15 +30,15 @@ namespace dotnetcore
             // Add framework services.
             services.AddMvc();
 
-            // get config object from section in appsettings
-            var settingsSection = Configuration.GetSection("MySettings");
-            var settings = settingsSection.Get<MySettings>();
+            // TODO: get config object from section in appsettings
+            IConfigurationSection settingsSection = null; // TODO
+            MySettings settings = null; // TODO
             services.Configure<MySettings>(settingsSection);
 
             // setup ClusterHelper for Couchbase
             ClusterHelper.Initialize(new ClientConfiguration
             {
-                Servers = new List<Uri> { new Uri(settings.CouchbaseServer) }
+                Servers = new List<Uri> { new Uri("TODO: get connection string from settings") }
             });
         }
 
@@ -48,7 +48,7 @@ namespace dotnetcore
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
 
-            // enable cors from anywhere across the board
+            // TODO: enable cors from anywhere across the board
             // think carefully before doing this in a production web service!
             app.UseCors(builder => builder
                 .AllowAnyHeader()

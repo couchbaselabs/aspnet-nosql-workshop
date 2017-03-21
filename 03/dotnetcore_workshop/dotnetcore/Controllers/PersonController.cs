@@ -18,38 +18,39 @@ namespace dotnetcore.Controllers
 
         public PersonController(IOptions<MySettings> settings)
         {
-            BucketName = settings.Value.CouchbaseBucket;
-            _bucket = ClusterHelper.GetBucket(BucketName);
+            BucketName = "TODO: get bucket name from settings";
+            _bucket = null; // TODO: Use ClusterHelper to get bucket
         }
 
         [HttpGet]
         [Route("get/{id?}")]
         public async Task<IActionResult> Get(string id = null)
         {
-            if (string.IsNullOrEmpty(id))
-            {
-                return BadRequest("Missing or empty 'id' query string parameter");
-            }
+            // TODO: if id is null, then return a BadRequest (400) with an error message
 
-            var result = await _bucket.GetAsync<Person>(id);
-            if (!result.Success)
-            {
-                return StatusCode((int)HttpStatusCode.OK, result.Exception?.Message ?? result.Message);
-            }
+            // TODO: use the GetAsync method of the bucket to get a Person document with key 'id'
+            IOperationResult<Person> result = null; // TODO
 
+            // TODO: if the result is not successful, then return an Internal Server Error (500) with an error message
+
+            // set the id on the result so it can be used by angular
             result.Value.Id = id;
 
-            return Ok(result.Value);
+            // TODO: return the document as an Ok (200) response
+            return Ok("TODO");
         }
 
         [HttpGet]
         [Route("getAll")]
         public async Task<IActionResult> Getall()
         {
+            // TODO: create a N1QL query that returns the key using META().id, and the rest of the document
+            // where the type of the document is 'person'
+            // and use RequestPlus scan consistency
             var query = new QueryRequest()
-                .Statement("SELECT META().id, `default`.* FROM `default` WHERE type = $1")
-                .AddPositionalParameter(typeof(Person).Name.ToLower())
-                .ScanConsistency(ScanConsistency.RequestPlus);
+                .Statement("TODO")
+                .AddPositionalParameter("TODO")
+                .ScanConsistency(ScanConsistency.NotBounded); // TODO
 
             var result = await _bucket.QueryAsync<Person>(query);
             if (!result.Success)
@@ -74,7 +75,9 @@ namespace dotnetcore.Controllers
                 person.Id = Guid.NewGuid().ToString();
             }
 
-            var result = await _bucket.UpsertAsync(person.Id, person);
+            // TODO: use the Upsert bucket operation to save the updated document or insert a new document
+            IOperationResult<Person> result = null; // TODO
+
             if (!result.Success)
             {
                 return StatusCode((int)HttpStatusCode.InternalServerError, result.Exception?.Message ?? result.Message);
@@ -92,7 +95,8 @@ namespace dotnetcore.Controllers
                 return BadRequest("Missing or invalid 'document_id' body parameter");
             }
 
-            var result = await _bucket.RemoveAsync(person.Id);
+            // TODO: use the Remove bucket operation to delete a document using its id
+            IOperationResult result = null; // TODO
             if (!result.Success)
             {
                 return StatusCode((int)HttpStatusCode.InternalServerError, result.Exception?.Message ?? result.Message);
