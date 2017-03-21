@@ -30,14 +30,6 @@ namespace dotnetcore
             // Add framework services.
             services.AddMvc();
 
-            // create a CORS policy that allows anyone to make a request
-            services.AddCors(o => o.AddPolicy("Anyone", builder =>
-            {
-                builder.AllowAnyOrigin()
-                       .AllowAnyMethod()
-                       .AllowAnyHeader();
-            }));
-
             // get config object from section in appsettings
             var settingsSection = Configuration.GetSection("MySettings");
             var settings = settingsSection.Get<MySettings>();
@@ -56,7 +48,16 @@ namespace dotnetcore
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
 
+            // enable cors from anywhere across the board
+            // think carefully before doing this in a production web service!
+            app.UseCors(builder => builder
+                .AllowAnyHeader()
+                .AllowAnyMethod()
+                .AllowAnyOrigin());
+
             app.UseMvc();
+
+            app.UseStaticFiles();
         }
     }
 }

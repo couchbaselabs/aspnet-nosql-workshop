@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Cors;
 using Couchbase.Core;
 using Couchbase;
 using Couchbase.N1QL;
@@ -11,8 +10,7 @@ using Microsoft.Extensions.Options;
 
 namespace dotnetcore.Controllers
 {
-    [Route("api/person")]
-    [EnableCors("Anyone")]
+    [Route("api/")]
     public class PersonController : Controller
     {
         private readonly string BucketName;
