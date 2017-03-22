@@ -48,7 +48,7 @@ namespace dotnetcore
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
 
-            // TODO: enable cors from anywhere across the board
+            // enable cors from anywhere across the board
             // think carefully before doing this in a production web service!
             app.UseCors(builder => builder
                 .AllowAnyHeader()
