@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="CouchbaseNetClient" Version="2.4.2" />
+    <PackageReference Include="CouchbaseNetClient" Version="2.4.5" />
   </ItemGroup>
 
 </Project>
