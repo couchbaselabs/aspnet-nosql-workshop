@@ -2,7 +2,7 @@
 
 The workshop will show developers how to build a full-stack CRUD application with Couchbase server. Angular will be used for the frontend. Application code will be written using .NET. Couchbase will be used as the backend database. You’ll learn how to do data modeling for a NoSQL-based application, learn Couchbase SDK design patterns, and learn about different tools to make you an effective user of Couchbase.
 
-Attendees will learn:
+== Attendees will learn:
 
 . Different options to install Couchbase Server
 . Basic configuration of Couchbase Server
@@ -13,92 +13,44 @@ Attendees will learn:
 . Effective use of developer tools such as Query Workbench, Couchbase CLI and REST API
 . How to create a simple Couchbase cluster using Docker or cloud platforms such as Amazon and Azure
 
-=== Workshops
+== Workshops
 
 * Workshop A: Installing and setting up Couchbase
 * Workshop B: Creating a "Hello, World" console application with .NET/C#
-* Workshop C: Creating a Full Stack ASP.NET Angular application
-* (optional) Workshop D: Setting up a Couchbase Cluster in Docker
+* Workshop C: Creating a RESTful ASP.NET WebAPI service
+* Workshop D: Creating an Angular web application that consumes a web service
 
-=== Target Audience
+== Target Audience
 
-Broad range of developers interested in using Couchbase Server
+Broad range of developers interested in using Couchbase Server, ASP.NET, .NET Core, NoSQL, and Angular.
 
-=== Requirements
+== Requirements
 
 Please have the appropriate software setup in advance so that we can maximize the time we have available for the workshop. I will be at the venue at least an hour early if you need any assistance getting set up.
  
 You will need:
  
-* A computer running Windows, Mac OS X (not Sierra), or Ubuntu Linux with at least 8gb of RAM.
+* A computer running Windows, Mac OS X, or Ubuntu 12/14 with at least 8gb of RAM.
 * You will need sufficient privileges to install software on the computer.
-* You will need to have Docker installed (for at least part 4 of the workshop)
 * The source code and slides (available on Github and also available via USB thumb drive the day of the workshop)
 * Slides will be available in Powerpoint and PDF format
  
 For .NET development you will need:
 
 * Visual Studio 2015 or later for .NET Framework
-* Visual Studio Code for .NET Core
+* Visual Studio 2017 (or Visual Studio Code) for .NET Core
  
 For Angular development, you will need:
 
 * angular-cli
-* Node 4.6
-* npm
- 
+* Node / npm
+
+== Optional
+
 If you wish to use Azure or Amazon for this workshop, you will need an account before you arrive, and some experience with using Azure/AWS.
 
 * Azure trial sign-up with free $200 credit: https://azure.microsoft.com/en-us/free/
 * Amazon AWS sign-up https://aws.amazon.com/
 * Couchbase Server 4.5 Enterprise Edition is available as a free trial in the Azure and AWS Marketplaces
 
-=== Requirements for Attendees
-
-Requirements for Attendees: Bring a laptop. You should development environment setup for  coding in one of the following platforms/languages: .NET/C#, Java, Node.js. (Other languages are supported by Couchbase, but are not guaranteed to be covered in this workshop).
-
-== Install and Configure Couchbase
-
-In this workshop, we will be learning how to do a simple installation of Couchbase Server. We will be going from nothing
-to a single node cluster. Instructions will be provided for a local install on Windows, OS X, and Ubuntu 12/14 Linux distros.
-We will also cover the creation of a Couchbase Server instance on the popular cloud hosting platforms AWS and Azure.
-Finally, we will go over a single node installation in a Docker container (using Docker, Docker for Windows, or Docker for Mac).
-When this session is complete, you will be ready for the next workshop.
-
-* Running on Desktop
-* Running on AWS / Azure
-* Running on Docker
-
-== Getting Familiar with Couchbase
-
-In this workshop, we will be going over some basic developer interactions with Couchbase Server. You'll learn about how
-to write and execute basic N1QL (SQL for JSON) queries in both the new Query Workbench and the cbq command line utility.
-We will also write a very simple program using the Couchbase SDK. This program will create a new document and store it in
-Couchbase, and it will also execute a N1QL query and display the results. Instructions will be provided for .NET.
-
-* Query Workbench / cbq
-* SDK Sample (.NET)
-
-== Building a Full-stack Application
-
-In this workshop, we will be building a full stack web application. We will be using Angular to create the UI, and it will
-make REST calls to a backend that interacts with Couchbase Server. Popular frameworks and languages will be covered, including
-ASP.NET WebAPI, Express.js, and Spring. We will continue discussing N1QL, and we'll also look at basic data modeling. Finally, we
-will look at some common design patterns for using the SDK in .NET.
-
-* Use an Angular frontend
-* Use .NET
-* Discuss data modeling
-* N1QL
-* SDK design patterns: async, timeouts, error handling, scan consistency (more?)
-
-== Sample Couchbase Cluster
-
-In this workshop, we will create a simple Couchbase Server cluster with multiple nodes. We will create a three node cluster
-through using Docker containers, and popular cloud services AWS and Azure. Instructions will be provided for doing this with
-your choice of Docker, Amazon, or Azure.
-
-* Simple Docker cluster
-* Simple Amazon cluster
-* Simple Azure cluster
-
+If you wish to use Docker, Instructions will be provided for running Couchbase Server on docker.
