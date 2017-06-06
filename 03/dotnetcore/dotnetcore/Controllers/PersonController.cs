@@ -34,7 +34,7 @@ namespace dotnetcore.Controllers
             var result = await _bucket.GetAsync<Person>(id);
             if (!result.Success)
             {
-                return StatusCode((int)HttpStatusCode.OK, result.Exception?.Message ?? result.Message);
+                return StatusCode((int)HttpStatusCode.InternalServerError, result.Exception?.Message ?? result.Message);
             }
 
             result.Value.Id = id;
