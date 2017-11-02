@@ -5,6 +5,7 @@ using Couchbase.Core;
 using Couchbase;
 using Couchbase.N1QL;
 using System.Net;
+using Couchbase.Extensions.DependencyInjection;
 using dotnetcore.Models;
 using Microsoft.Extensions.Options;
 
@@ -13,13 +14,11 @@ namespace dotnetcore.Controllers
     [Route("api/")]
     public class PersonController : Controller
     {
-        private readonly string BucketName;
         private readonly IBucket _bucket;
 
-        public PersonController(IOptions<MySettings> settings)
+        public PersonController(IBucketProvider bucketProvider)
         {
-            BucketName = settings.Value.CouchbaseBucket;
-            _bucket = ClusterHelper.GetBucket(BucketName);
+            _bucket = bucketProvider.GetBucket("workshop");
         }
 
         [HttpGet]
@@ -47,7 +46,7 @@ namespace dotnetcore.Controllers
         public async Task<IActionResult> Getall()
         {
             var query = new QueryRequest()
-                .Statement("SELECT META().id, `default`.* FROM `default` WHERE type = $1")
+                .Statement("SELECT META().id, b.* FROM `workshop` b WHERE type = $1")
                 .AddPositionalParameter(typeof(Person).Name.ToLower())
                 .ScanConsistency(ScanConsistency.RequestPlus);
 

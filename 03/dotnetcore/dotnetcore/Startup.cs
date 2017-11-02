@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
+using Couchbase.Extensions.DependencyInjection;
 
 namespace dotnetcore
 {
@@ -30,20 +31,12 @@ namespace dotnetcore
             // Add framework services.
             services.AddMvc();
 
-            // get config object from section in appsettings
-            var settingsSection = Configuration.GetSection("MySettings");
-            var settings = settingsSection.Get<MySettings>();
-            services.Configure<MySettings>(settingsSection);
-
-            // setup ClusterHelper for Couchbase
-            ClusterHelper.Initialize(new ClientConfiguration
-            {
-                Servers = new List<Uri> { new Uri(settings.CouchbaseServer) }
-            });
+            var couchbaseConfig = Configuration.GetSection("Couchbase");
+            services.AddCouchbase(couchbaseConfig);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, IApplicationLifetime applicationLifetime)
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
@@ -58,6 +51,11 @@ namespace dotnetcore
             app.UseMvc();
 
             app.UseStaticFiles();
+
+            applicationLifetime.ApplicationStopped.Register(() =>
+            {
+                app.ApplicationServices.GetRequiredService<ICouchbaseLifetimeService>().Close();
+            });
         }
     }
 }

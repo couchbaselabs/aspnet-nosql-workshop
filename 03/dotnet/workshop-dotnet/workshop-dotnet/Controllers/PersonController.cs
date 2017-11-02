@@ -15,8 +15,13 @@ namespace workshop_dotnet.Controllers
     [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class PersonController : ApiController
     {
-        private static readonly string BucketName = ConfigurationManager.AppSettings.Get("couchbaseBucket");
-        private readonly IBucket _bucket = ClusterHelper.GetBucket(BucketName);
+        private readonly IBucket _bucket;
+
+        public PersonController()
+        {
+            var bucketName = ConfigurationManager.AppSettings.Get("couchbaseBucket");
+            _bucket = CouchbaseConfig.Cluster.OpenBucket(bucketName);
+        }
 
         [HttpGet]
         [Route("get/{id?}")]
@@ -43,7 +48,9 @@ namespace workshop_dotnet.Controllers
         public async Task<IHttpActionResult> Getall()
         {
             var query = new QueryRequest()
-                .Statement("SELECT META().id, `default`.* FROM `default` WHERE type = $1")
+                .Statement(@"SELECT META().id, b.* 
+                           FROM `workshop` b
+                           WHERE type = $1")
                 .AddPositionalParameter(typeof(Person).Name.ToLower())
                 .ScanConsistency(ScanConsistency.RequestPlus);
 
