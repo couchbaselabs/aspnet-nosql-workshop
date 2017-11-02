@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using Couchbase;
+using Couchbase.Authentication;
 using Couchbase.Configuration.Client;
 using Couchbase.Core;
 using Couchbase.N1QL;
@@ -11,6 +12,7 @@ namespace DotnetExample
     class Program
     {
         private static IBucket _bucket;
+        private static Cluster _cluster;
 
         static void Main(string[] args)
         {
@@ -33,7 +35,7 @@ namespace DotnetExample
             Console.WriteLine($"Inserted document, key: {document.Id}");
 
             // query all the keys and documents using N1QL
-            var queryText = "SELECT META(p).id AS documentKey, p.* FROM `default` AS p WHERE type='person'";
+            var queryText = "SELECT META(p).id AS documentKey, p.* FROM `workshop` AS p WHERE type='person'";
             var query = QueryRequest.Create(queryText);
             query.ScanConsistency(ScanConsistency.RequestPlus);
             var result = _bucket.Query<dynamic>(query);
@@ -56,13 +58,14 @@ namespace DotnetExample
             config.Servers = new List<Uri> {
                 new Uri("couchbase://localhost")
             };
-            ClusterHelper.Initialize(config);
-            _bucket = ClusterHelper.GetBucket("default");
+            _cluster = new Cluster(config);
+            _cluster.Authenticate(new PasswordAuthenticator("matt","password"));
+            _bucket = _cluster.OpenBucket("workshop");
         }
 
         private static void CloseCouchbase()
         {
-            ClusterHelper.Close();
+            _cluster.Dispose();
         }
     }
 }
