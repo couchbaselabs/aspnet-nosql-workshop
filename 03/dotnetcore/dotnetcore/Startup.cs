@@ -8,6 +8,7 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using Couchbase.Extensions.DependencyInjection;
+using Swashbuckle.AspNetCore.Swagger;
 
 namespace dotnetcore
 {
@@ -31,6 +32,11 @@ namespace dotnetcore
             // Add framework services.
             services.AddMvc();
 
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new Info { Title = "Couchbase API", Version = "v1" });
+            });
+
             var couchbaseConfig = Configuration.GetSection("Couchbase");
             services.AddCouchbase(couchbaseConfig);
         }
@@ -47,6 +53,12 @@ namespace dotnetcore
                 .AllowAnyHeader()
                 .AllowAnyMethod()
                 .AllowAnyOrigin());
+
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+            });
 
             app.UseMvc();
 
